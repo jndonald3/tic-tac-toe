@@ -7,7 +7,7 @@ A simple tic-tac-toe game using cocoa and swift for iOS
 - iOS 8 Simulator or iOS 8+ Simulator (Other simulator should work as well, however the UI might be clunky)
 
 # How To Run
-- Build and Run the project file from xcode
+- Build and Run the project file from xcode (located at /TicTacToe/TicTacToe.xcodeproj)
 
 # How To Play
 - Instructions are provided in game
