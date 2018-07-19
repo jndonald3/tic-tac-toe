@@ -28,7 +28,6 @@
                         <rect key="frame" x="4" y="4" width="115" height="103"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="95"/>
-                        <state key="normal" title="O"/>
                         <connections>
                             <action selector="placedPiece:" destination="hEU-qx-dag" eventType="touchUpInside" id="wxc-Tc-1fM"/>
                         </connections>

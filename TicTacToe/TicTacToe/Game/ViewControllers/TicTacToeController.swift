@@ -97,6 +97,12 @@ class TicTacToeController: UIViewController
         {
             let piece = (npc.isAttacking) ? TicTacToePiece.createAttackingPiece() : TicTacToePiece.createDefendingPiece()
             self.game.setPiece(atRow: Int(aiLocation.x), col: Int(aiLocation.y), piece: piece)
+            
+            // get the cell at the location, and update the ui board
+            let itemLocation = (Int(aiLocation.x) * TicTacToeGame.kMaxSpaces) + Int(aiLocation.y)
+            let indexPath = IndexPath(item: itemLocation, section: 0)
+            if let cell = self.collectionView?.cellForItem(at: indexPath) as? TicTacToeCell
+            { cell.setup(withPiece: piece) }
         }
     }
     
@@ -227,8 +233,10 @@ extension TicTacToeController:TicTacToeCellDelegate
         // set the piece for the player at the given location
         self.game.setPiece(atRow: Int(pt.x), col: Int(pt.y), piece: piece)
         
+        cell.setup(withPiece: piece)
+        
         // reload the collection view
-        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
         
         // check if the game is over
         guard self.checkGameOver() == false else
@@ -238,7 +246,7 @@ extension TicTacToeController:TicTacToeCellDelegate
         self.takeAITurn()
         
         // reload the collection view
-        self.collectionView?.reloadData()
+        self.collectionView?.collectionViewLayout.invalidateLayout()
         
         // check if the game is over
         guard self.checkGameOver() == false else
@@ -253,6 +261,19 @@ extension TicTacToeController: UICollectionViewDataSource
     { return TicTacToeGame.kMaxSpaces * TicTacToeGame.kMaxSpaces }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {        
+        // create the cell to be displayed for the user
+        var cell = UICollectionViewCell(frame: CGRect())
+        
+        // setup the cell with the tic tac toe piece
+        if let ticTacToeCell = collectionView.dequeueReusableCell(withReuseIdentifier: TicTacToeCell.reuseIdentifier(), for: indexPath) as? TicTacToeCell
+        { cell = ticTacToeCell }
+        
+        // return the cell for display
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     {
         // get the board index
         let pt = self.calculatePoint(fromIndexPath: indexPath)
@@ -260,19 +281,12 @@ extension TicTacToeController: UICollectionViewDataSource
         // grab the piece at that location
         let piece = self.game.getPiece(atRow: Int(pt.x), col: Int(pt.y))
         
-        // create the cell to be displayed for the user
-        var cell = UICollectionViewCell(frame: CGRect())
-        
         // setup the cell with the tic tac toe piece
-        if let ticTacToeCell = collectionView.dequeueReusableCell(withReuseIdentifier: TicTacToeCell.reuseIdentifier(), for: indexPath) as? TicTacToeCell
+        if let ticTacToeCell = cell as? TicTacToeCell
         {
-            ticTacToeCell.setup(withPience: piece)
+            ticTacToeCell.setup(withPiece: piece)
             ticTacToeCell.delegate = self
-            cell = ticTacToeCell
         }
-        
-        // return the cell for display
-        return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int

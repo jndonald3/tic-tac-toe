@@ -20,7 +20,7 @@ class TicTacToeCell: UICollectionViewCell
     
     // The button associated with this cell
     // If the cell is disabled, the button should show the selected piece which was placed at that board location
-    @IBOutlet fileprivate  var button:UIButton?
+    @IBOutlet fileprivate var button:UIButton?
     
     override func prepareForReuse()
     {
@@ -37,7 +37,7 @@ class TicTacToeCell: UICollectionViewCell
      * @param piece: The piece which should be dislayed by this board cell
      * @note: a nil piece indicates that a player has not yet played on this cell, and the cell should be enabled
      */
-    func setup(withPience piece:TicTacToePiece?)
+    func setup(withPiece piece:TicTacToePiece?)
     {        
         if let placedPiece = piece
         {
