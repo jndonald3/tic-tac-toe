@@ -36,12 +36,25 @@ class TicTacToeController: UIViewController
     public static let identifier:String = "TicTacToeController"
     @IBOutlet fileprivate var collectionView:UICollectionView?
     @IBOutlet fileprivate var giveupButton:UIButton?
+    @IBOutlet fileprivate var thinkingIndicator:UIActivityIndicatorView?
+    @IBOutlet fileprivate var thinkingLabel:UILabel?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.registerCells()
+        self.thinkingLabel?.text = NSLocalizedString("Your opponent is thinking", comment: "Your opponent is thinking")
+        self.thinkingLabel?.isHidden = true
+        self.thinkingIndicator?.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.giveupButton?.layer.borderWidth = 2.0
+        self.giveupButton?.layer.borderColor = UIColor.black.cgColor
     }
     
     // If the player gives up, then they lose the game
@@ -51,12 +64,16 @@ class TicTacToeController: UIViewController
     /**
      * This function properly initializes the game and creates 1 human player and 1 AI player
      * @param attackingPlayer: True if the human player is playing as the attacking player, false if the AI player is attacking
+     * @param aiMode: The mode of the ai player which the human is playing against
      */
-    public func setup(withAttackingPlayer pcIsAttacking:Bool)
+    public func setup(withAttackingPlayer pcIsAttacking:Bool, andAIMode aiMode:AIMode)
     {
         // create the players
         self.pc  = Player(isAttacking: pcIsAttacking)
         self.npc = AIPlayer(isAttacking: !pcIsAttacking)
+        
+        // set the ai mode
+        self.npc?.set(mode: aiMode)
         
         // if the AI is the attacking player, it should take its turn first
         if(!pcIsAttacking)
@@ -92,18 +109,49 @@ class TicTacToeController: UIViewController
         guard let npc = self.npc else
         { return }
         
-        // Allow the AI player to take its turn if there are still moves available
-        if let aiLocation = npc.takeTurn(forGame: self.game)
+        // disable user interaction with the collection view while the computer player is thinking
+        self.toggleThinking(toOn: true)
+        
+        // run on a background thread to avoid blocking the ui thread in case the player wants to quit
+        weak var weakself = self
+        DispatchQueue.global().async
         {
-            let piece = (npc.isAttacking) ? TicTacToePiece.createAttackingPiece() : TicTacToePiece.createDefendingPiece()
-            self.game.setPiece(atRow: Int(aiLocation.x), col: Int(aiLocation.y), piece: piece)
-            
-            // get the cell at the location, and update the ui board
-            let itemLocation = (Int(aiLocation.x) * TicTacToeGame.kMaxSpaces) + Int(aiLocation.y)
-            let indexPath = IndexPath(item: itemLocation, section: 0)
-            if let cell = self.collectionView?.cellForItem(at: indexPath) as? TicTacToeCell
-            { cell.setup(withPiece: piece) }
+            // Allow the AI player to take its turn if there are still moves available
+            if let game = weakself?.game, let aiLocation = npc.takeTurn(forGame: game)
+            {
+                let piece = (npc.isAttacking) ? TicTacToePiece.createAttackingPiece() : TicTacToePiece.createDefendingPiece()
+                weakself?.game.setPiece(atRow: Int(aiLocation.x), col: Int(aiLocation.y), piece: piece)
+                
+                // get the cell at the location, and update the ui board
+                let itemLocation = (Int(aiLocation.x) * TicTacToeGame.kMaxSpaces) + Int(aiLocation.y)
+                let indexPath = IndexPath(item: itemLocation, section: 0)
+                
+                // return cotrol to the main thread
+                DispatchQueue.main.async
+                {
+                    // update the cells
+                    if let cell = weakself?.collectionView?.cellForItem(at: indexPath) as? TicTacToeCell
+                    { cell.setup(withPiece: piece) }
+                    
+                    // re-enable interaction for the player
+                    self.toggleThinking(toOn: false)
+                    
+                    // reload the collection view
+                    self.collectionView?.collectionViewLayout.invalidateLayout()
+                    
+                    // check if the game is now over
+                    let _ = self.checkGameOver()
+                }
+            }
         }
+    }
+    
+    // Will toggle the thinking indicator and thinking label to become visible or invisible
+    private func toggleThinking(toOn on:Bool)
+    {
+        self.collectionView?.isUserInteractionEnabled = !on
+        self.thinkingIndicator?.isHidden = !on
+        self.thinkingLabel?.isHidden = !on
     }
     
     /**
@@ -244,13 +292,6 @@ extension TicTacToeController:TicTacToeCellDelegate
         
         // Allow the AI player to take its turn
         self.takeAITurn()
-        
-        // reload the collection view
-        self.collectionView?.collectionViewLayout.invalidateLayout()
-        
-        // check if the game is over
-        guard self.checkGameOver() == false else
-        { return }
     }
 }
 

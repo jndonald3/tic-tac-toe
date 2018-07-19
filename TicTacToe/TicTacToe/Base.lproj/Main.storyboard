@@ -29,16 +29,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oO-gi-5oP">
-                                <rect key="frame" x="15" y="394.5" width="345" height="262.5"/>
-                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
-                                <state key="normal" title="Play As Defending Player (O)"/>
-                                <connections>
-                                    <action selector="pressedDefend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GAC-kl-Xea"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccU-Mr-sji">
-                                <rect key="frame" x="15" y="121.5" width="345" height="263"/>
+                                <rect key="frame" x="15" y="121.5" width="345" height="167"/>
                                 <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
                                 <state key="normal" title="Play As Attacking Player (X)">
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,26 +39,77 @@
                                     <action selector="pressedAttack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KkV-bb-eci"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oO-gi-5oP">
+                                <rect key="frame" x="15" y="298.5" width="345" height="166.5"/>
+                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
+                                <state key="normal" title="Play As Defending Player (O)"/>
+                                <connections>
+                                    <action selector="pressedDefend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GAC-kl-Xea"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBZ-bV-sKQ">
+                                <rect key="frame" x="15" y="535" width="345" height="112"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="112" id="8vW-od-mxG"/>
+                                </constraints>
+                                <string key="text">Your opponent is unpredictable. The AI seems to randomly pick locations on the board, making it impossible to determine its next move.</string>
+                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AI Difficulty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVG-su-cn8">
+                                <rect key="frame" x="15" y="469" width="345" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="AhW-aQ-zgv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0sX-7b-Gae">
+                                <rect key="frame" x="15" y="501" width="345" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="HcI-SV-TAi"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Random"/>
+                                    <segment title="Impossible"/>
+                                </segments>
+                                <connections>
+                                    <action selector="difficultyChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="hdv-f0-iQB"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ccU-Mr-sji" firstAttribute="width" secondItem="tSH-4N-yZR" secondAttribute="width" id="10s-Op-5qX"/>
                             <constraint firstItem="ccU-Mr-sji" firstAttribute="top" secondItem="tSH-4N-yZR" secondAttribute="bottom" constant="10" id="3a7-p1-Gkq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZBZ-bV-sKQ" secondAttribute="bottom" constant="20" id="9ZM-ZF-59w"/>
                             <constraint firstItem="ccU-Mr-sji" firstAttribute="height" secondItem="5oO-gi-5oP" secondAttribute="height" id="DNX-qf-bbR"/>
                             <constraint firstItem="tSH-4N-yZR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="DXx-RC-tkt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5oO-gi-5oP" secondAttribute="bottom" constant="10" id="Wc7-TG-vVC"/>
+                            <constraint firstItem="ZBZ-bV-sKQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="M2L-oi-tNq"/>
+                            <constraint firstItem="0sX-7b-Gae" firstAttribute="top" secondItem="dVG-su-cn8" secondAttribute="bottom" constant="4" id="VWU-Vr-4Bf"/>
                             <constraint firstItem="tSH-4N-yZR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ajt-Uh-8Vv"/>
+                            <constraint firstItem="dVG-su-cn8" firstAttribute="top" secondItem="5oO-gi-5oP" secondAttribute="bottom" constant="4" id="dHH-R0-sP5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0sX-7b-Gae" secondAttribute="trailing" constant="15" id="fcR-rp-I91"/>
                             <constraint firstItem="ccU-Mr-sji" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fkC-6x-NrW"/>
+                            <constraint firstItem="dVG-su-cn8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="hCK-1S-rD2"/>
                             <constraint firstItem="5oO-gi-5oP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i7q-6t-G4V"/>
                             <constraint firstItem="ccU-Mr-sji" firstAttribute="width" secondItem="5oO-gi-5oP" secondAttribute="width" id="kDX-ar-06r"/>
+                            <constraint firstItem="0sX-7b-Gae" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="nYh-kC-r5O"/>
                             <constraint firstItem="5oO-gi-5oP" firstAttribute="top" secondItem="ccU-Mr-sji" secondAttribute="bottom" constant="10" id="nfK-XX-1Dg"/>
+                            <constraint firstItem="ZBZ-bV-sKQ" firstAttribute="top" secondItem="0sX-7b-Gae" secondAttribute="bottom" constant="4" id="oSD-b0-6dU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dVG-su-cn8" secondAttribute="trailing" constant="15" id="sZe-w8-Ura"/>
                             <constraint firstItem="tSH-4N-yZR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="vG2-zs-sah"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZBZ-bV-sKQ" secondAttribute="trailing" constant="15" id="vh6-oy-j0f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="attackButton" destination="ccU-Mr-sji" id="pg4-HG-LjC"/>
                         <outlet property="defendButton" destination="5oO-gi-5oP" id="Ydy-Tm-ahb"/>
+                        <outlet property="difficultyLabel" destination="ZBZ-bV-sKQ" id="JCP-uA-NY6"/>
+                        <outlet property="difficultySegment" destination="0sX-7b-Gae" id="5wK-tf-teF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -125,16 +168,36 @@
                                     <action selector="pressedGiveup:" destination="5nz-yn-gU7" eventType="touchUpInside" id="LaJ-KQ-DOc"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rjs-EH-YjK">
+                                <rect key="frame" x="15" y="516" width="50" height="50"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Gtv-Gj-hgf"/>
+                                    <constraint firstAttribute="height" constant="50" id="MDO-IQ-NfV"/>
+                                </constraints>
+                                <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Opponent is thinking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOj-fa-Hzq">
+                                <rect key="frame" x="69" y="527" width="291" height="28"/>
+                                <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rjs-EH-YjK" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="0Uu-JH-PhZ"/>
                             <constraint firstItem="5zc-HP-0G3" firstAttribute="centerX" secondItem="Nyk-8F-0O2" secondAttribute="centerX" id="2ld-f0-DlS"/>
                             <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="FhT-it-vVj" secondAttribute="trailing" constant="15" id="4qW-Ej-JAd"/>
+                            <constraint firstItem="rjs-EH-YjK" firstAttribute="top" secondItem="zpN-8a-SHr" secondAttribute="bottom" constant="10" id="8Tj-5Q-tD5"/>
                             <constraint firstItem="FhT-it-vVj" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="D2g-jR-bWW"/>
                             <constraint firstItem="zpN-8a-SHr" firstAttribute="top" secondItem="5zc-HP-0G3" secondAttribute="bottom" constant="10" id="Eul-em-5pR"/>
                             <constraint firstItem="zpN-8a-SHr" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="NCK-cp-7FJ"/>
+                            <constraint firstItem="vOj-fa-Hzq" firstAttribute="centerY" secondItem="rjs-EH-YjK" secondAttribute="centerY" id="Uso-Km-OTu"/>
                             <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="zpN-8a-SHr" secondAttribute="trailing" constant="15" id="Xcp-m1-rpn"/>
                             <constraint firstItem="FhT-it-vVj" firstAttribute="top" secondItem="vdf-JU-KUd" secondAttribute="top" constant="20" id="amU-2T-8yZ"/>
+                            <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="vOj-fa-Hzq" secondAttribute="trailing" constant="15" id="pcz-0p-rle"/>
+                            <constraint firstItem="vOj-fa-Hzq" firstAttribute="leading" secondItem="rjs-EH-YjK" secondAttribute="trailing" constant="4" id="psG-2L-BUH"/>
                             <constraint firstItem="5zc-HP-0G3" firstAttribute="top" secondItem="FhT-it-vVj" secondAttribute="bottom" constant="50" id="pu6-iX-Q4A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vdf-JU-KUd"/>
@@ -142,6 +205,8 @@
                     <connections>
                         <outlet property="collectionView" destination="5zc-HP-0G3" id="iyR-oH-1dL"/>
                         <outlet property="giveupButton" destination="zpN-8a-SHr" id="PeV-SW-nPs"/>
+                        <outlet property="thinkingIndicator" destination="rjs-EH-YjK" id="QRg-60-UJG"/>
+                        <outlet property="thinkingLabel" destination="vOj-fa-Hzq" id="A9S-PN-58Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rzp-Ch-aYY" userLabel="First Responder" sceneMemberID="firstResponder"/>

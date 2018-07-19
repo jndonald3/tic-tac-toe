@@ -14,6 +14,12 @@ import UIKit
  */
 class AIStrategyRandom:AIStrategy
 {
+    //MARK: - Properties -
+    private var isAttacking:Bool
+    
+    required init(isAttacking: Bool)
+    { self.isAttacking = isAttacking }
+    
     func execute(forGame game: TicTacToeGame) -> CGPoint?
     {
         // get the open locations on the board

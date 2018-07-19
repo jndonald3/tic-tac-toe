@@ -10,6 +10,7 @@ import UIKit
 
 /**
  * Responsible for managing the state of the game
+ * Use a struct so that the game can be easily copied
  */
 struct TicTacToeGame
 {
