@@ -44,7 +44,7 @@ class TicTacToeController: UIViewController
         super.viewDidLoad()
         
         self.registerCells()
-        self.thinkingLabel?.text = NSLocalizedString("Your opponent is thinking", comment: "Your opponent is thinking")
+        self.thinkingLabel?.text = NSLocalizedString("Your opponent is thinking. Please wait before tapping on a board cell", comment: "Your opponent is thinking")
         self.thinkingLabel?.isHidden = true
         self.thinkingIndicator?.isHidden = true
     }

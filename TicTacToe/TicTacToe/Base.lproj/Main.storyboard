@@ -169,7 +169,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rjs-EH-YjK">
-                                <rect key="frame" x="15" y="516" width="50" height="50"/>
+                                <rect key="frame" x="15" y="520" width="50" height="50"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Gtv-Gj-hgf"/>
@@ -178,7 +178,7 @@
                                 <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Opponent is thinking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOj-fa-Hzq">
-                                <rect key="frame" x="69" y="527" width="291" height="28"/>
+                                <rect key="frame" x="69" y="531" width="291" height="28"/>
                                 <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -189,13 +189,13 @@
                             <constraint firstItem="rjs-EH-YjK" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="0Uu-JH-PhZ"/>
                             <constraint firstItem="5zc-HP-0G3" firstAttribute="centerX" secondItem="Nyk-8F-0O2" secondAttribute="centerX" id="2ld-f0-DlS"/>
                             <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="FhT-it-vVj" secondAttribute="trailing" constant="15" id="4qW-Ej-JAd"/>
-                            <constraint firstItem="rjs-EH-YjK" firstAttribute="top" secondItem="zpN-8a-SHr" secondAttribute="bottom" constant="10" id="8Tj-5Q-tD5"/>
                             <constraint firstItem="FhT-it-vVj" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="D2g-jR-bWW"/>
                             <constraint firstItem="zpN-8a-SHr" firstAttribute="top" secondItem="5zc-HP-0G3" secondAttribute="bottom" constant="10" id="Eul-em-5pR"/>
                             <constraint firstItem="zpN-8a-SHr" firstAttribute="leading" secondItem="vdf-JU-KUd" secondAttribute="leading" constant="15" id="NCK-cp-7FJ"/>
                             <constraint firstItem="vOj-fa-Hzq" firstAttribute="centerY" secondItem="rjs-EH-YjK" secondAttribute="centerY" id="Uso-Km-OTu"/>
                             <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="zpN-8a-SHr" secondAttribute="trailing" constant="15" id="Xcp-m1-rpn"/>
                             <constraint firstItem="FhT-it-vVj" firstAttribute="top" secondItem="vdf-JU-KUd" secondAttribute="top" constant="20" id="amU-2T-8yZ"/>
+                            <constraint firstItem="vOj-fa-Hzq" firstAttribute="top" secondItem="zpN-8a-SHr" secondAttribute="bottom" constant="25" id="btC-th-6tl"/>
                             <constraint firstItem="vdf-JU-KUd" firstAttribute="trailing" secondItem="vOj-fa-Hzq" secondAttribute="trailing" constant="15" id="pcz-0p-rle"/>
                             <constraint firstItem="vOj-fa-Hzq" firstAttribute="leading" secondItem="rjs-EH-YjK" secondAttribute="trailing" constant="4" id="psG-2L-BUH"/>
                             <constraint firstItem="5zc-HP-0G3" firstAttribute="top" secondItem="FhT-it-vVj" secondAttribute="bottom" constant="50" id="pu6-iX-Q4A"/>
