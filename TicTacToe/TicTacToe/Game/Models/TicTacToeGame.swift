@@ -52,8 +52,8 @@ struct TicTacToeGame
             return colWinner
         }
         
-        // check the diagonols in the board
-        if let diagWinner = self.checkDiagonols()
+        // check the diagonals in the board
+        if let diagWinner = self.checkDiagonals()
         {
             return diagWinner
         }
@@ -178,16 +178,16 @@ struct TicTacToeGame
     }
     
     /**
-     * Checks each diagonol of the game board to determine if a player has won the game
-     * @returns The player who won the game, or nil if no player has won by diagonols
+     * Checks each diagonal of the game board to determine if a player has won the game
+     * @returns The player who won the game, or nil if no player has won by diagonals
      */
-    private func checkDiagonols() -> TicTacToePiece?
+    private func checkDiagonals() -> TicTacToePiece?
     {
-        // The middle piece in the board must be set in order for diagonols to be scored
+        // The middle piece in the board must be set in order for diagonals to be scored
         guard(self.board[1][1] != nil) else
         { return nil }
         
-        // There are only 2 possible diagonols, just check with brute force
+        // There are only 2 possible diagonals, just check with brute force
         if(self.board[0][0] == self.board[1][1] && self.board[1][1] == self.board[2][2])
         {
             return self.board[1][1]

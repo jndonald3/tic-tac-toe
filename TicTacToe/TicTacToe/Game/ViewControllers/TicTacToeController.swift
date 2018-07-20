@@ -205,7 +205,7 @@ class TicTacToeController: UIViewController
     {
         let controller = UIAlertController(
             title: NSLocalizedString("You Lose", comment: "You Lose"),
-            message: NSLocalizedString("You loss, Maybe next time!", comment: "You loss, Maybe next time!"),
+            message: NSLocalizedString("You lost, Maybe next time!", comment: "You lost, Maybe next time!"),
             preferredStyle: .alert)
         
         weak var weakself = self
@@ -223,7 +223,7 @@ class TicTacToeController: UIViewController
     {
         let controller = UIAlertController(
             title: NSLocalizedString("You Win", comment: "You Win"),
-            message: NSLocalizedString("Congragulations! You Won!", comment: "Congragulations! You Won!"),
+            message: NSLocalizedString("Congratulations! You Won!", comment: "Congratulations! You Won!"),
             preferredStyle: .alert)
         
         weak var weakself = self

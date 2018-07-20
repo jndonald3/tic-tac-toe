@@ -37,17 +37,12 @@ class AIStrategyMinimax: AIStrategy
      * on their corresponding turn after a move has been selected
      * @param gameState: The current game state to evaluate
      * @param isMaximizing: True if the AI should be trying to win during this simulation, false if the AI should be trying to lose
-     * @param depth: How far along in the game state tree are we, the closer we are to winning the game, the more that moves should count
      * @returns The heuristic score for the given board state and the best possible move in this state
      */
     private func minimax(gameState:TicTacToeGame, isMaximizing:Bool) -> (Int64, CGPoint?)
     {
         // get the available moves
         let openMoves = gameState.getOpenSpaces()
-
-        // if there are no moves left, this is a terminal state
-        guard (openMoves.count > 0) else
-        { return (AIStrategyMinimax.drawScore, nil) }
         
         // if a player has won, this is a terminal state. There are no next moves in terminal states
         let winner = gameState.checkWinner()
@@ -60,8 +55,13 @@ class AIStrategyMinimax: AIStrategy
             { score = (self.isAttacking) ? AIStrategyMinimax.winScore : AIStrategyMinimax.loseScore }
             else
             { score = (self.isAttacking) ? AIStrategyMinimax.loseScore : AIStrategyMinimax.winScore }
+            
             return (score, nil)
         }
+
+        // if there are no moves left, this is a terminal state
+        guard (openMoves.count > 0) else
+        { return (AIStrategyMinimax.drawScore, nil) }
 
         // get all available moves
         var bestMove:CGPoint?   = nil
@@ -72,6 +72,7 @@ class AIStrategyMinimax: AIStrategy
             var copyState = gameState
             let pieceToPlace = self.createPieceToPlace(forIsAttacking: self.isAttacking, andIsMaximizing: isMaximizing)
             copyState.setPiece(atRow: Int(move.x), col: Int(move.y), piece: pieceToPlace)
+            
             // recurse to simulate the opponent's move
             let (score, _) = self.minimax(gameState: copyState, isMaximizing: !isMaximizing)
 
