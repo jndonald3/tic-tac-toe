@@ -51,7 +51,7 @@ struct TicTacToeGame
         {
             return colWinner
         }
-        
+
         // check the diagonals in the board
         if let diagWinner = self.checkDiagonals()
         {
@@ -140,15 +140,33 @@ struct TicTacToeGame
         // check each row in the game board to determine if there is a winner
         for row in 0..<TicTacToeGame.kMaxSpaces
         {
-            // if the first location is nil, skip this iteration
-            guard(self.board[row][0] != nil) else
-            { continue }
-            
-            // if each value is the same, then there is a winner
-            if(self.board[row][0] == self.board[row][1] && self.board[row][1] == self.board[row][2])
+            var won = true
+            var currentPlayer:TicTacToePiece? = nil
+            for col in 0..<TicTacToeGame.kMaxSpaces
             {
-                return self.board[row][0]
+                // check if this location is empty
+                guard (self.board[row][col] != nil) else
+                {
+                    won = false
+                    break
+                }
+                
+                // check if the player piece was ever set
+                if(currentPlayer == nil)
+                {
+                    currentPlayer = self.board[row][col]
+                }
+                else if(currentPlayer != self.board[row][col])
+                {
+                    // This row has a piece which was not the same as the original piece placed in the row
+                    won = false
+                    break
+                }
             }
+            
+            // check if this was a 3 in a row case
+            if(won && currentPlayer != nil)
+            { return currentPlayer }
         }
         
         return nil
@@ -163,15 +181,33 @@ struct TicTacToeGame
         // check each column in the game board to determine if there is a winner
         for col in 0..<TicTacToeGame.kMaxSpaces
         {
-            // if the first location is nil, skip this iteration
-            guard(self.board[0][col] != nil) else
-            { continue }
-            
-            // if each value is the same, then there is a winner
-            if(self.board[0][col] == self.board[1][col] && self.board[1][col] == self.board[2][col])
+            var won = true
+            var currentPlayer:TicTacToePiece? = nil
+            for row in 0..<TicTacToeGame.kMaxSpaces
             {
-                return self.board[0][col]
+                // check if this location is empty
+                guard (self.board[row][col] != nil) else
+                {
+                    won = false
+                    break
+                }
+                
+                // check if the player was ever set
+                if(currentPlayer == nil)
+                {
+                    currentPlayer = self.board[row][col]
+                }
+                else if(currentPlayer != self.board[row][col])
+                {
+                    // This column has a piece which was not the same as the original piece placed in the column
+                    won = false
+                    break
+                }
             }
+            
+            // check if this was a 3 in a column case
+            if(won && currentPlayer != nil)
+            { return currentPlayer }
         }
         
         return nil
@@ -183,20 +219,69 @@ struct TicTacToeGame
      */
     private func checkDiagonals() -> TicTacToePiece?
     {
-        // The middle piece in the board must be set in order for diagonals to be scored
-        guard(self.board[1][1] != nil) else
-        { return nil }
+        // check the diagonols in the game
+        // There are exactly 2 diagonols in tic tac toe: [(0,0), (1,1), (2,2)] && [(0,2), (1,1), (2,0)]
+        // The first can be seen to be the pairing of the same index for row and column
+        // In the second diagonol, it can be seen that the row is calculated as index, and the column is kMaxSpaces-index-1
         
-        // There are only 2 possible diagonals, just check with brute force
-        if(self.board[0][0] == self.board[1][1] && self.board[1][1] == self.board[2][2])
+        // Loop to check the first diagonol (pair of the same index)
+        var won = true
+        var currentPlayer:TicTacToePiece? = nil
+        for diag in 0..<TicTacToeGame.kMaxSpaces
         {
-            return self.board[1][1]
+            // check if this location is empty
+            guard (self.board[diag][diag] != nil) else
+            {
+                won = false
+                break
+            }
+            
+            // check if the player was ever set
+            if(currentPlayer == nil)
+            {
+                currentPlayer = self.board[diag][diag]
+            }
+            else if(currentPlayer != self.board[diag][diag])
+            {
+                // This diagonal has a piece which was not the same as the original piece placed in the diagonal
+                won = false
+                break
+            }
         }
         
-        if(self.board[0][2] == self.board[1][1] && self.board[1][1] == self.board[2][0])
+        // check if this was a 3 in a row case
+        if(won && currentPlayer != nil)
+        { return currentPlayer }
+        
+        // Loop to check the second diagonol (index, kMaxSpaces-index-1)
+        won = true
+        currentPlayer = nil
+        for diag in 0..<TicTacToeGame.kMaxSpaces
         {
-            return self.board[1][1]
+            let columnIndex = TicTacToeGame.kMaxSpaces - diag - 1
+            // check if this location is empty
+            guard (self.board[diag][columnIndex] != nil) else
+            {
+                won = false
+                break
+            }
+            
+            // check if the player was ever set
+            if(currentPlayer == nil)
+            {
+                currentPlayer = self.board[diag][columnIndex]
+            }
+            else if(currentPlayer != self.board[diag][columnIndex])
+            {
+                // This diagonal has a piece which was not the same as the original piece placed in the diagonal
+                won = false
+                break
+            }
         }
+        
+        // check if this was a 3 in a row case
+        if(won && currentPlayer != nil)
+        { return currentPlayer }
         
         return nil
     }

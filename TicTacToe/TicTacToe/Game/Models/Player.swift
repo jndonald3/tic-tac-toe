@@ -16,7 +16,7 @@ class Player
     
     /**
      * Creates a new player which can be set to attacking or not attacking
-     * @param isAttacking: Determins whether this player controls the attacking piece or defending piece, set to true for the player to control attacking pieces
+     * @param isAttacking: Determines whether this player controls the attacking piece or defending piece, set to true for the player to control attacking pieces
      */
     init(isAttacking:Bool)
     {
