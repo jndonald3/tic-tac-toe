@@ -24,7 +24,7 @@ class MasterViewController: UIViewController
         "Your opponent is unpredictable. The AI seems to randomly pick locations on the board, making it impossible to determine its next move.",
         comment: "Random AI Opponent")
     private static let impossibleString = NSLocalizedString(
-        "Your opponent is a genius, making every correct move in every situation. There is no winning against this opponent.",
+        "Your opponent is a genius. The AI makes every correct move in every situation. There is no winning against this opponent.",
         comment: "Impossible AI Opponent")
     private var aiMode = AIMode.random
     

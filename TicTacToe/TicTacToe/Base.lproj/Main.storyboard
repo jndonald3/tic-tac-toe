@@ -152,7 +152,7 @@
                                     <outlet property="delegate" destination="5nz-yn-gU7" id="3bB-4F-5uV"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on a Board Location below to Place your piece! Get 3 in a row to Win!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhT-it-vVj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on a board location below to place your piece! Get 3 in a row to win!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhT-it-vVj">
                                 <rect key="frame" x="15" y="40" width="345" height="84"/>
                                 <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -163,7 +163,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qeJ-HQ-VfS"/>
                                 </constraints>
-                                <state key="normal" title="Give Up"/>
+                                <state key="normal" title="Give up"/>
                                 <connections>
                                     <action selector="pressedGiveup:" destination="5nz-yn-gU7" eventType="touchUpInside" id="LaJ-KQ-DOc"/>
                                 </connections>

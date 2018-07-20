@@ -44,7 +44,7 @@ class TicTacToeController: UIViewController
         super.viewDidLoad()
         
         self.registerCells()
-        self.thinkingLabel?.text = NSLocalizedString("Your opponent is thinking. Please wait before tapping on a board cell", comment: "Your opponent is thinking")
+        self.thinkingLabel?.text = NSLocalizedString("Your opponent is thinking. Please wait before tapping on a board cell.", comment: "Your opponent is thinking")
         self.thinkingLabel?.isHidden = true
         self.thinkingIndicator?.isHidden = true
     }
@@ -59,7 +59,7 @@ class TicTacToeController: UIViewController
     
     // If the player gives up, then they lose the game
     @IBAction fileprivate func pressedGiveup(_ sender:Any?)
-    { self.displayLossMessage() }
+    { self.displayLostMessage() }
     
     /**
      * This function properly initializes the game and creates 1 human player and 1 AI player
@@ -126,7 +126,7 @@ class TicTacToeController: UIViewController
                 let itemLocation = (Int(aiLocation.x) * TicTacToeGame.kMaxSpaces) + Int(aiLocation.y)
                 let indexPath = IndexPath(item: itemLocation, section: 0)
                 
-                // return cotrol to the main thread
+                // return control to the main thread
                 DispatchQueue.main.async
                 {
                     // update the cells
@@ -134,13 +134,13 @@ class TicTacToeController: UIViewController
                     { cell.setup(withPiece: piece) }
                     
                     // re-enable interaction for the player
-                    self.toggleThinking(toOn: false)
+                    weakself?.toggleThinking(toOn: false)
                     
                     // reload the collection view
-                    self.collectionView?.collectionViewLayout.invalidateLayout()
+                    weakself?.collectionView?.collectionViewLayout.invalidateLayout()
                     
                     // check if the game is now over
-                    let _ = self.checkGameOver()
+                    let _ = weakself?.checkGameOver()
                 }
             }
         }
@@ -176,12 +176,12 @@ class TicTacToeController: UIViewController
                 if(pc.isAttacking)
                 { self.displayWonMessage() }
                 else
-                { self.displayLossMessage() }
+                { self.displayLostMessage() }
             }
             else // the defender has won the game
             {
                 if(pc.isAttacking)
-                { self.displayLossMessage() }
+                { self.displayLostMessage() }
                 else
                 { self.displayWonMessage() }
             }
@@ -201,11 +201,11 @@ class TicTacToeController: UIViewController
     }
     
     // Displays the message for when the computer player has won the game
-    private func displayLossMessage()
+    private func displayLostMessage()
     {
         let controller = UIAlertController(
             title: NSLocalizedString("You Lose", comment: "You Lose"),
-            message: NSLocalizedString("You lost, Maybe next time!", comment: "You lost, Maybe next time!"),
+            message: NSLocalizedString("You lost, try again next time!", comment: "You lost, try again next time!"),
             preferredStyle: .alert)
         
         weak var weakself = self
@@ -345,8 +345,8 @@ extension TicTacToeController: UICollectionViewDelegateFlowLayout
         let cvSize = collectionView.frame.size
         let interimSpacing = flow.minimumInteritemSpacing
         let lineSpacing = flow.minimumLineSpacing
-        let cellWidth = floor(cvSize.width - (4*interimSpacing))/3
-        let cellHeight = floor(cvSize.height - (4*lineSpacing))/3
+        let cellWidth = floor(cvSize.width - (4*interimSpacing)) / CGFloat(TicTacToeGame.kMaxSpaces)
+        let cellHeight = floor(cvSize.height - (4*lineSpacing)) / CGFloat(TicTacToeGame.kMaxSpaces)
         return CGSize(width: cellWidth, height: cellHeight);
     }
 }
