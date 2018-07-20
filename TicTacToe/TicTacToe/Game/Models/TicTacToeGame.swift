@@ -224,7 +224,25 @@ struct TicTacToeGame
         // The first can be seen to be the pairing of the same index for row and column
         // In the second diagonol, it can be seen that the row is calculated as index, and the column is kMaxSpaces-index-1
         
-        // Loop to check the first diagonol (pair of the same index)
+        if let diagWinner = self.checkTopLeftToBottomRight()
+        {
+            return diagWinner
+        }
+        else if let diagWinner = self.checkBottomLeftToTopRight()
+        {
+            return diagWinner
+        }
+        
+        // no diagonal winners
+        return nil
+    }
+    
+    /**
+     * Checks the diagonal which runs from the top left corner of the board to the bottom right corner of the board
+     */
+    private func checkTopLeftToBottomRight() -> TicTacToePiece?
+    {
+        // Loop to check the first diagonal (pair of the same index)
         var won = true
         var currentPlayer:TicTacToePiece? = nil
         for diag in 0..<TicTacToeGame.kMaxSpaces
@@ -253,9 +271,17 @@ struct TicTacToeGame
         if(won && currentPlayer != nil)
         { return currentPlayer }
         
+        return nil
+    }
+    
+    /**
+     * Checks the diagonal which runs from the bottom left corner of the board to the top right corner of the board
+     */
+    private func checkBottomLeftToTopRight() -> TicTacToePiece?
+    {
         // Loop to check the second diagonol (index, kMaxSpaces-index-1)
-        won = true
-        currentPlayer = nil
+        var won = true
+        var currentPlayer:TicTacToePiece? = nil
         for diag in 0..<TicTacToeGame.kMaxSpaces
         {
             let columnIndex = TicTacToeGame.kMaxSpaces - diag - 1
